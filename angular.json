@@ -37,6 +37,128 @@
           }
         }
       }
+    },
+    "magic-strings-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/magic-strings-app",
+      "sourceRoot": "projects/magic-strings-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/magic-strings-app",
+            "index": "projects/magic-strings-app/src/index.html",
+            "main": "projects/magic-strings-app/src/main.ts",
+            "polyfills": "projects/magic-strings-app/src/polyfills.ts",
+            "tsConfig": "projects/magic-strings-app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/magic-strings-app/src/favicon.ico",
+              "projects/magic-strings-app/src/assets"
+            ],
+            "styles": [
+              "projects/magic-strings-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/magic-strings-app/src/environments/environment.ts",
+                  "with": "projects/magic-strings-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "magic-strings-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "magic-strings-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "magic-strings-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/magic-strings-app/src/test.ts",
+            "polyfills": "projects/magic-strings-app/src/polyfills.ts",
+            "tsConfig": "projects/magic-strings-app/tsconfig.spec.json",
+            "karmaConfig": "projects/magic-strings-app/karma.conf.js",
+            "assets": [
+              "projects/magic-strings-app/src/favicon.ico",
+              "projects/magic-strings-app/src/assets"
+            ],
+            "styles": [
+              "projects/magic-strings-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/magic-strings-app/tsconfig.app.json",
+              "projects/magic-strings-app/tsconfig.spec.json",
+              "projects/magic-strings-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/magic-strings-app/e2e/protractor.conf.js",
+            "devServerTarget": "magic-strings-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "magic-strings-app:serve:production"
+            }
+          }
+        }
+      }
     }},
   "defaultProject": "magic-lib"
 }
